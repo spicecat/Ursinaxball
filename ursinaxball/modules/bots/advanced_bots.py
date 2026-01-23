@@ -125,7 +125,9 @@ def shoot_disc_close(
 ) -> int:
     dist = np.linalg.norm(disc.position - player.disc.position)
     if (dist - player.disc.radius - disc.radius) < precision:
-        if player._kick_cancel and previous_actions[ActionBin.KICK] == 1:  # noqa: SLF001
+        if (
+            player._kick_cancel and previous_actions[ActionBin.KICK] == 1
+        ):  # noqa: SLF001
             return 0
         else:
             return 1

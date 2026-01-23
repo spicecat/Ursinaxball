@@ -67,7 +67,9 @@ class ChaseBot(Bot):
 
         dist = np.linalg.norm(ball.position - player.disc.position)
         if (dist - player.disc.radius - ball.radius) < 15:
-            if ~player._kick_cancel and self.previous_actions[ActionBin.KICK] == 1:  # noqa: SLF001
+            if (
+                ~player._kick_cancel and self.previous_actions[ActionBin.KICK] == 1
+            ):  # noqa: SLF001
                 inputs_player[ActionBin.KICK] = 0
             else:
                 inputs_player[ActionBin.KICK] = 1

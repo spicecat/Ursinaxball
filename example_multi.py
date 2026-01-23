@@ -27,11 +27,11 @@ game.add_players(players)
 
 @dataclass
 class InputPlayer:
-    left: list[str]
-    right: list[str]
-    up: list[str]
-    down: list[str]
-    shoot: list[str]
+    left: list[Keys | str]
+    right: list[Keys | str]
+    up: list[Keys | str]
+    down: list[Keys | str]
+    shoot: list[Keys | str]
 
 
 input_player_1 = InputPlayer(
@@ -53,7 +53,7 @@ input_player_2 = InputPlayer(
 
 def action_handle(actions_player_output: list[int], inputs_player: InputPlayer):
     actions_player_output = [0, 0, 0]
-    for key, value in held_keys.items():
+    for key, value in held_keys.items():  # pyright: ignore[reportAttributeAccessIssue]
         if value != 0:
             if key in inputs_player.left:
                 actions_player_output[0] -= 1

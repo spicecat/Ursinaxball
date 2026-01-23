@@ -120,11 +120,13 @@ class Game:
                 disc_vector = current_disc_pos.position - previous_disc_pos.position
                 goal_vector = goal.points[1] - goal.points[0]
                 if (
-                    np.cross(current_p0, disc_vector)
-                    * np.cross(current_p1, disc_vector)
+                    np.cross(np.append(current_p0, 0), np.append(disc_vector, 0))[-1]
+                    * np.cross(np.append(current_p1, 0), np.append(disc_vector, 0))[-1]
                     <= 0
-                    and np.cross(previous_p0, goal_vector)
-                    * np.cross(current_p0, goal_vector)
+                    and np.cross(np.append(previous_p0, 0), np.append(goal_vector, 0))[
+                        -1
+                    ]
+                    * np.cross(np.append(current_p0, 0), np.append(goal_vector, 0))[-1]
                     <= 0
                 ):
                     team_score = TeamID.RED if goal.team == "red" else TeamID.BLUE
@@ -244,9 +246,11 @@ class Game:
                     player.disc.position = np.array(
                         [
                             -self.stadium_game.spawn_distance,
-                            -55 * (red_count + 1 >> 1)
-                            if (red_count % 2) == 1
-                            else 55 * (red_count + 1 >> 1),
+                            (
+                                -55 * (red_count + 1 >> 1)
+                                if (red_count % 2) == 1
+                                else 55 * (red_count + 1 >> 1)
+                            ),
                         ]
                     )
                 red_count += 1
@@ -259,9 +263,11 @@ class Game:
                     player.disc.position = np.array(
                         [
                             self.stadium_game.spawn_distance,
-                            -55 * (blue_count + 1 >> 1)
-                            if (blue_count % 2) == 1
-                            else 55 * (blue_count + 1 >> 1),
+                            (
+                                -55 * (blue_count + 1 >> 1)
+                                if (blue_count % 2) == 1
+                                else 55 * (blue_count + 1 >> 1)
+                            ),
                         ]
                     )
                 blue_count += 1
