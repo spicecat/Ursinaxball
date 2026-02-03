@@ -25,13 +25,20 @@ def test_chase_bot_kick_cancel():
 
     game.start()
 
-    # Run a few steps to ensure no deprecation warnings
+    # Run a few steps to ensure bot executes actions correctly
+    actions_executed = []
     for _ in range(10):
         actions_player_1 = player_red.step(game)
         actions_player_2 = [0, 0, 0]
+        actions_executed.append(actions_player_1)
         done = game.step([actions_player_1, actions_player_2])
         if done:
             break
 
-    # Test passes if no deprecation warning is raised
-    assert True
+    # Verify that bot returned valid actions (list of 3 integers)
+    assert len(actions_executed) > 0, "Bot should have executed at least one action"
+    for actions in actions_executed:
+        assert isinstance(actions, list), "Actions should be a list"
+        assert len(actions) == 3, "Actions should contain 3 elements"
+        assert all(isinstance(a, int) for a in actions), "All actions should be integers"
+
