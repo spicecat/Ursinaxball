@@ -89,7 +89,7 @@ class GameActionRecorder:
         save_path.parent.mkdir(parents=True, exist_ok=True)
         with save_path.open("wb+") as f:
             encoded_recording = msgpack.packb(self.recording)
-            f.write(encoded_recording)
+            f.write(encoded_recording) # pyright: ignore[reportArgumentType]
 
     def read_from_file(self, file_name: str) -> None:
         with Path(file_name).open("rb") as f:
@@ -172,7 +172,7 @@ class GamePositionRecorder:
         save_path.parent.mkdir(parents=True, exist_ok=True)
         with save_path.open("wb+") as f:
             encoded_recording = msgpack.packb(self.recording)
-            f.write(encoded_recording)
+            f.write(encoded_recording) # pyright: ignore[reportArgumentType]
 
     def read_from_file(self, file_name: str) -> None:
         with Path(file_name).open("rb") as f:
