@@ -85,7 +85,9 @@ class GameActionRecorder:
         self.options = []
 
     def save(self, file_name: str) -> None:
-        with (Path(__file__).parent / self.folder_rec / file_name).open("wb+") as f:
+        save_path = Path(self.folder_rec) / file_name
+        save_path.parent.mkdir(parents=True, exist_ok=True)
+        with save_path.open("wb+") as f:
             encoded_recording = msgpack.packb(self.recording)
             f.write(encoded_recording)
 
