@@ -3,7 +3,7 @@ from __future__ import annotations
 from abc import ABC, abstractmethod
 
 from numpy import cos, sin
-from ursina.color import Color, rgba
+from ursina.color import Color, rgba32
 
 from ursinaxball.common_values import DICT_COLLISION, DICT_KEYS
 
@@ -65,10 +65,10 @@ class PhysicsObject(ABC):
     @staticmethod
     def parse_color_entity(color: str) -> Color:
         if color == "transparent":
-            return rgba(0, 0, 0, 0)
+            return rgba32(0, 0, 0, 0)
 
         (r, g, b) = tuple(int(color[i : i + 2], 16) for i in (0, 2, 4))
-        return rgba(r, g, b)
+        return rgba32(r, g, b)
 
     @staticmethod
     def arc(
