@@ -10,7 +10,7 @@ class GameConfig:
 
     stadium_file: str = BaseMap.CLASSIC
     folder_rec: str = ""
-    logging_level: int = logging.DEBUG
+    logging_level: int = logging.ERROR
     enable_vsync: bool = True
     enable_renderer: bool = True
     fov: int = 550
